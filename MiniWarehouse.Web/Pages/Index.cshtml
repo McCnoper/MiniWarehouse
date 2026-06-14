@@ -1,0 +1,48 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Головна";
+}
+
+<div class="text-center">
+    <h1 class="display-4 fw-bold">Складсьий облік</h1>
+    <p class="lead">Система управління товарами та замовленнями.</p>
+</div>
+
+<div class="container mt-5">
+    <h3>Список доступних товарів</h3>
+    <table class="table table-hover table-bordered mt-3 shadow-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>SKU</th>
+                <th>Назва товару</th>
+                <th>Ціна</th>
+                <th>Залишок</th>
+                <th>Склад</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var p in Model.Products)
+            {
+                <tr>
+                    <td>@p.Id</td>
+                    <td><span class="badge bg-secondary">@p.SKU</span></td>
+                    <td class="fw-bold">@p.Name</td>
+                    <td>@p.Price ₴</td>
+                    <td>
+                        @if (p.Quantity > 0)
+                        {
+                            <span class="text-success">@p.Quantity шт.</span>
+                        }
+                        else
+                        {
+                            <span class="text-danger">Немає в наявності</span>
+                        }
+                    </td>
+                    <td>@p.WarehouseName</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
